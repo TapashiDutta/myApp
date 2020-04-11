@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/account"
+        android:icon="@drawable/a"
+        android:title="My Account"/>
+    <item android:id="@+id/profile"
+        android:icon="@drawable/j"
+        android:title="Update Profile"/>
+    <item  android:id="@+id/qrScanner"
+        android:icon="@drawable/i"
+        android:title="QR Scanner" />
+    <item  android:id="@+id/live"
+        android:icon="@drawable/h"
+        android:title="Live Bookings" />
+    <item android:id="@+id/exit"
+        android:icon="@drawable/c"
+        android:title="Exit"/>
+
+</menu>
