@@ -27,14 +27,14 @@ import java.util.regex.Pattern;
 
 public class Registration extends AppCompatActivity {
     private TextView tv;
-    EditText name, email, phone, password,hid;
+    EditText name, email, phone, password,confirm;
     Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         tv=findViewById(R.id.textView);
-        hid = findViewById(R.id.editText7);
+        confirm = findViewById(R.id.editText7);
         name = findViewById(R.id.editText);
         phone = findViewById(R.id.editText2);
         password = findViewById(R.id.editText3);
@@ -88,24 +88,47 @@ public class Registration extends AppCompatActivity {
         return matcher.matches();
 
     }
+    public static boolean isValidEmail(final String email) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(email);
+
+        return matcher.matches();
+
+    }
+
     public void onPost(View view)
     {
         String url = "https://ananthous-corrosion.000webhostapp.com/register.php";
         JSONObject postparams = new JSONObject();
         try {
-            if(!isValidPassword(password.getText().toString())){
-                Toast.makeText(getApplicationContext(),
-                        "Password Invalid...\n PASSWORD should contain at least 8 characters with 1 Upper Case, 1 Lower Case, 1 Numeric and 1 special character",
-                        Toast.LENGTH_SHORT).show();
-            }
             if(phone.getText().length()<10)
             {
                 Toast.makeText(getApplicationContext(),
                         "Phone Number Invalid...",
                         Toast.LENGTH_SHORT).show();
             }
+            else if(!isValidPassword(password.getText().toString()))
+            {
+                Toast.makeText(getApplicationContext(),
+                        "Password Invalid...\n PASSWORD should contain at least 8 characters with 1 Upper Case, 1 Lower Case, 1 Numeric and 1 special character",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else if(!(confirm.getText().toString().equals(password.getText().toString()))){
+                Toast.makeText(getApplicationContext(),
+                        "Check Confirm Password",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else if(!isValidEmail(email.getText().toString()))
+            {
+                Toast.makeText(getApplicationContext(),
+                        "Email Invalid...",
+                        Toast.LENGTH_SHORT).show();
+            }
             else {
-                postparams.put("hId", hid.getText());
                 postparams.put("userName", name.getText());
                 postparams.put("pswd", password.getText());
                 postparams.put("hEmail", email.getText());
