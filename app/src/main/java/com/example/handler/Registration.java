@@ -41,42 +41,7 @@ public class Registration extends AppCompatActivity {
         email = findViewById(R.id.editText4);
         save = findViewById(R.id.button2);
     }
-    public void onSubmit(View view){
-        //URL of the request we are sending
-        String url = "https://ananthous-corrosion.000webhostapp.com/index.php?all";
-        tv.setText("function called");
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONArray>(){
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        //Success Callback
-                        JSONObject obj=null;
-                        String str="";
-                        try {
-                            for(int i =0; i<response.length();i++) {
-                                obj = response.getJSONObject(i);
-                                str+=obj.getString("id")+":"+obj.getString("username")+":"+obj.getString("email")+"\n";
 
-                            }
-                            tv.setText(str);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Failure Callback
-                        tv.setText(error.getMessage() );
-                    }
-                });
-// Adding the request to the queue along with a unique string tag
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjReq);
-    }
     public static boolean isValidPassword(final String password) {
 
         Pattern pattern;
@@ -114,7 +79,7 @@ public class Registration extends AppCompatActivity {
             else if(!isValidPassword(password.getText().toString()))
             {
                 Toast.makeText(getApplicationContext(),
-                        "Password Invalid...\n PASSWORD should contain at least 8 characters with 1 Upper Case, 1 Lower Case, 1 Numeric and 1 special character",
+                        "Password Invalid...\n PASSWORD should contain at least 8 characters with 1 Upper Case, 1 Lower Case, 1 Numeric and 1 special character(@,#,$,%,^,&,+)",
                         Toast.LENGTH_SHORT).show();
             }
             else if(!(confirm.getText().toString().equals(password.getText().toString()))){
