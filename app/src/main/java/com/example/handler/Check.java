@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -127,42 +128,50 @@ public class Check extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjReq);
     }
-    public void onDetails(View view)
-    {
-        String url = "https://ananthous-corrosion.000webhostapp.com/details.php?uId="+cId.getText();
-        tv1.setText("function called");
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONArray>(){
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        //Success Callback
-                        JSONObject obj=null;
-                        String str="";
-                        try {
-                            for(int i =0; i<response.length();i++) {
-                                obj = response.getJSONObject(i);
-                                str+="Name: "+obj.getString("cName")+" \nEmail: "+obj.getString("cEmail")+"\n";
-                                str+= "Vehicle Number: "+obj.getString("number")+"\nVehicle Model: "+obj.getString("model")+"\n";
-                                str+= "Latitude: "+obj.getString("cLat")+"\nLongitude: "+obj.getString("cLong");
-                                str+= "\n\nArrival: "+obj.getString("arr")+"\n\nExpected Departure: "+obj.getString("dep");
+    public void onDetails(View view) {
+        if (cId.getText().toString().isEmpty())
+            Toast.makeText(getApplicationContext(), "Scan the Customer QR Code", Toast.LENGTH_SHORT).show();
+        else {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading Customer Details. Please Wait...");
+            progressDialog.show();
+            String url = "https://ananthous-corrosion.000webhostapp.com/details.php?uId=" + cId.getText();
+            //tv1.setText("function called");
+            JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
+                    url, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            //Success Callback
+                            progressDialog.dismiss();
+                            JSONObject obj = null;
+                            String str = "";
+                            try {
+                                for (int i = 0; i < response.length(); i++) {
+                                    obj = response.getJSONObject(i);
+                                    str += "Name: " + obj.getString("cName") + " \nEmail: " + obj.getString("cEmail") + "\n";
+                                    str += "Vehicle Number: " + obj.getString("number") + "\nVehicle Model: " + obj.getString("model") + "\n";
+                                    str += "Latitude: " + obj.getString("cLat") + "\nLongitude: " + obj.getString("cLong");
+                                    str += "\n\nArrival: " + obj.getString("arr") + "\n\nExpected Departure: " + obj.getString("dep");
+                                }
+                                tv1.setText(str);
+                            } catch (Exception e) {
                             }
-                            tv1.setText(str);
-                        } catch(Exception e){}
 
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Failure Callback
-                        tv1.setText(error.getMessage() );
-                    }
-                });
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //Failure Callback
+                            progressDialog.dismiss();
+                            tv1.setText(error.getMessage());
+                        }
+                    });
 // Adding the request to the queue along with a unique string tag
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjReq);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjReq);
+        }
+
     }
-
-
 }

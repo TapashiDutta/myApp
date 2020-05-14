@@ -3,6 +3,7 @@ package com.example.handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,8 @@ public class MainActivity extends Activity {
     Button login,b2,b3;
     EditText ed1,ed2;
 
-    TextView tx1;
+    //TextView tx1;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,56 +41,70 @@ public class MainActivity extends Activity {
         ed2 = findViewById(R.id.editText2);
 
         b2 = findViewById(R.id.button2);
-        tx1 = findViewById(R.id.textView3);
+        //tx1 = findViewById(R.id.textView3);
         //tx2 = findViewById(R.id.textView6);
 
         b3 = findViewById(R.id.button3);
+
     }
     public void onLogin(View v) {
-        String url = "https://ananthous-corrosion.000webhostapp.com/verify2.php?userName=" + ed1.getText() + "&pswd=" + ed2.getText();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //Success Callback
-                        JSONObject obj = null;
-                        try {
-                            if (response.getString("msg").equals("OK")) {
-                                tx1.setText("VERIFIED");
-                                Toast.makeText(getApplicationContext(),
-                                        "Redirecting...", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, Check.class);
-                                intent.putExtra("pswd", ed2.getText().toString());
-                                startActivity(intent);
-                            } else if (response.getString("msg").equals("ERROR")) {
-                                tx1.setText("ERROR");
-                            } else {
-                                tx1.setText(response.getString("msg"));
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Checking Credentials...");
+        progressDialog.show();
+        if (ed1.getText().toString().isEmpty() || ed2.getText().toString().isEmpty()) {
+            progressDialog.dismiss();
+            Toast.makeText(getApplicationContext(), "Enter Username & Password", Toast.LENGTH_SHORT).show();
+        } else {
+            url = "https://ananthous-corrosion.000webhostapp.com/verify2.php?userName=" + ed1.getText() + "&pswd=" + ed2.getText();
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                    url, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //Success Callback
+                            JSONObject obj = null;
+                            try {
+                                if (response.getString("msg").equals("OK")) {
+                                    progressDialog.dismiss();
+                                    //tx1.setText("VERIFIED");
+                                    Toast.makeText(getApplicationContext(),
+                                            "Redirecting...", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this, Check.class);
+                                    intent.putExtra("pswd", ed2.getText().toString());
+                                    startActivity(intent);
+                                } else if (response.getString("msg").equals("ERROR")) {
+                                    //tx1.setText("ERROR");
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), "You need to Reqister!!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    //tx1.setText(response.getString("msg"));
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), "You need to Reqister!!", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
                         }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Failure Callback
-                        tx1.setText(error.getMessage());
-                    }
-                });
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //Failure Callback
+                            //tx1.setText(error.getMessage());
+                        }
+                    });
 // Adding the request to the queue along with a unique string tag
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjReq);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjReq);
 
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+            b2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
     public void onReg(View view)
     {

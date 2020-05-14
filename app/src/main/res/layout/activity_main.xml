@@ -113,7 +113,7 @@
         android:layout_marginEnd="8dp"
         android:layout_toEndOf="@+id/textview"
         android:layout_toRightOf="@+id/textview"
-        android:text="Check"
+        android:text=""
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
