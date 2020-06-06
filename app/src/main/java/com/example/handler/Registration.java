@@ -60,7 +60,7 @@ public class Registration extends AppCompatActivity {
         return matcher.matches();
 
     }
-    public static boolean isValidEmail(final String email) {
+   /* public static boolean isValidEmail(final String email) {
 
         Pattern pattern;
         Matcher matcher;
@@ -70,7 +70,7 @@ public class Registration extends AppCompatActivity {
 
         return matcher.matches();
 
-    }
+    }*/
     public void onPost(View view)
     {
         if(((Button)view).getText().toString().equals("VERIFY"))
@@ -87,10 +87,6 @@ public class Registration extends AppCompatActivity {
                 } else if (!(confirm.getText().toString().equals(password.getText().toString()))) {
                     Toast.makeText(getApplicationContext(),
                             "Check Confirm Password",
-                            Toast.LENGTH_SHORT).show();
-                } else if (!isValidEmail(email.getText().toString())) {
-                    Toast.makeText(getApplicationContext(),
-                            "Email Invalid...",
                             Toast.LENGTH_SHORT).show();
                 } else {
 
