@@ -4,30 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/car"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Login"
-        android:textSize="35dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/lottieAnimationView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="car.json"
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -44,6 +39,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.011" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="welcome.json"
+        app:lottie_loop="true"
+        tools:layout_editor_absoluteX="8dp" />
 
     <EditText
         android:id="@+id/editText"
@@ -68,10 +77,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.182" />
+        app:layout_constraintVertical_bias="0.678" />
 
     <EditText
         android:id="@+id/editText2"
@@ -100,26 +109,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_toEndOf="@+id/textview"
-        android:layout_toRightOf="@+id/textview"
-        android:text=""
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
+        app:layout_constraintVertical_bias="0.793" />
 
     <Button
         android:id="@+id/button"
@@ -132,16 +122,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_toStartOf="@+id/textview"
-        android:layout_toLeftOf="@+id/textview"
+
+
         android:onClick="onLogin"
         android:text="login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.445" />
+        app:layout_constraintVertical_bias="0.905" />
 
     <Button
         android:id="@+id/button2"
@@ -154,15 +144,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_toEndOf="@+id/textview"
-        android:layout_toRightOf="@+id/textview"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.536" />
+        app:layout_constraintVertical_bias="0.977" />
 
     <Button
         android:id="@+id/button3"
@@ -180,9 +168,9 @@
         android:text="sign-up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintHorizontal_bias="0.902"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.445" />
+        app:layout_constraintVertical_bias="0.905" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
