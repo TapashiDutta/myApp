@@ -88,6 +88,10 @@ public class Registration extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Check Confirm Password",
                             Toast.LENGTH_SHORT).show();
+                } else if (email.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(),
+                            "Enter your email address",
+                            Toast.LENGTH_SHORT).show();
                 } else {
 
                     Random random = new Random();

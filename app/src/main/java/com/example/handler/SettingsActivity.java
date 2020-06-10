@@ -43,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
         ed2 = findViewById(R.id.editText2);
 
         String url = "https://ananthous-corrosion.000webhostapp.com/details2.php?pswd="+pswd;
-        tv1.setText("function called");
+        //tv1.setText("function called");
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONArray>(){
@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         //Success Callback
                         String url = "https://ananthous-corrosion.000webhostapp.com/details2.php?pswd="+pswd;
-                        tv1.setText("function called");
+                        //tv1.setText("function called");
                         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
                                 url, null,
                                 new Response.Listener<JSONArray>(){

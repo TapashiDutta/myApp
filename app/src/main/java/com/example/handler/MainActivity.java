@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
 
     //TextView tx1;
     String url;
+    static protected int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
         //tx2 = findViewById(R.id.textView6);
 
         b3 = findViewById(R.id.button3);
+        a=0;
 
     }
     public void onLogin(View v) {
@@ -98,12 +100,6 @@ public class MainActivity extends Activity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(jsonObjReq);
 
-            b2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
         }
     }
     public void onReg(View view)
