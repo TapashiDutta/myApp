@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
         ed2 = findViewById(R.id.editText2);
 
         b2 = findViewById(R.id.button2);
-        //tx1 = findViewById(R.id.textView3);
+        //tx1 = findViewById(R.id.textView);
         //tx2 = findViewById(R.id.textView6);
 
         b3 = findViewById(R.id.button3);
@@ -75,11 +76,9 @@ public class MainActivity extends Activity {
                                     intent.putExtra("pswd", ed2.getText().toString());
                                     startActivity(intent);
                                 } else if (response.getString("msg").equals("ERROR")) {
-                                    //tx1.setText("ERROR");
                                     progressDialog.dismiss();
                                     Toast.makeText(getApplicationContext(), "You need to Reqister!!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    //tx1.setText(response.getString("msg"));
                                     progressDialog.dismiss();
                                     Toast.makeText(getApplicationContext(), "You need to Reqister!!", Toast.LENGTH_SHORT).show();
                                 }
